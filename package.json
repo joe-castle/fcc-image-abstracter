@@ -1,7 +1,7 @@
 {
   "name": "image-abstraction-project",
   "version": "1.0.0",
-  "description": "Twitch App from FCC",
+  "description": "Image Abstraction Project from FCC",
   "main": "index.js",
   "scripts": {
     "start": "node src/server.js",

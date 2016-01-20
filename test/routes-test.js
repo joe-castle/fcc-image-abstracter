@@ -5,8 +5,12 @@ const expect = require('chai').expect;
 
 const app = require('../src/routes');
 
+const db = require('../src/db/client');
+
 describe('Express Routes', () => {
   describe('To image search API', () => {
+    before(() => db.flushdb());
+    after(() => db.flushdb());
     it('Returns a 200 status', (done) => {
       request(app)
         .get('/api/imagesearch/lolcats')
@@ -42,6 +46,28 @@ describe('Express Routes', () => {
         .get('/api/imagesearch/lolcats')
         .expect((res) => {
           expect(res.body[0]).to.have.all.keys(expectedResponse);
+        })
+        .end(done);
+    });
+  });
+  describe('To latest image searches', () => {
+    before(() => db.flushdb());
+    after(() => db.flushdb());
+    it('Returns a 200 status', (done) => {
+      request(app)
+        .get('/api/latest/imagesearch')
+        .expect(200, done);
+    });
+    it('Returns JSON format', (done) => {
+      request(app)
+        .get('/api/latest/imagesearch')
+        .expect('Content-Type', /json/, done);
+    });
+    it('Returns the 10 latest search results', (done) => {
+      request(app)
+        .get('/api/latest/imagesearch')
+        .expect((res) => {
+          expect(res.body).to.have.length.of.at.most(10);
         })
         .end(done);
     });

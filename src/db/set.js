@@ -1,7 +1,11 @@
 'use strict';
 
-const client = require('./db-client');
+const client = require('./client');
+const dbGet = require('./get');
 
-module.exports = (data) => {
-  client.set('latestSearches', JSON.stringify(data));
+module.exports = (latestSearch) => {
+  dbGet.then(data => {
+    data.push(latestSearch);
+    client.set('latestSearches', JSON.stringify(data));
+  })
 };;

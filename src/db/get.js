@@ -1,10 +1,8 @@
 'use strict';
 
-const client = require('./db-client');
+const client = require('./client');
 
-module.exports = (callback) => {
-  client.get('latestSearches', (err, data) => {
-    if (err) throw err;
-    callback(JSON.parse(data) || []);
-  });
-};
+module.exports = (
+  client.getAsync('latestSearches')
+    .then(res => (JSON.parse(res) || []))
+);

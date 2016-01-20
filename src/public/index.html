@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <title>FCC Image Abstracter Project</title>
+  </head>
+  <body>
+    <div id="root" class='container'>
+      <h1 class="text-center" style="text-decoration:underline">FCC Image Abstracter Project</h1>
+      <h3>Example Image Search</h3>
+      <code style='margin-bottom: 10px; display: block'>https://fcc-image.herokuapp.com/api/imagesearch/programming</code>
+      <pre>
+        [
+          {
+            url: "https://www.greenedu.com/img/ajax-programming.jpg",
+            snippet: "AJAX Programming Courses",
+            thumbnail: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR289ZWtkg48qnxeaTe6SQMWZIkIdifZyWiO1azaX8dYKXooWuYXjlVFwo",
+            context: "https://www.greenedu.com/ajax-programming-courses"
+          },
+          {...}
+        ]</pre>
+      <p>You can pass an offset number, e.g: <code>?offset=2</code>, to paginate through the results. 10 results per page.</p>
+      <h3>Example Latest Image Searches</h3>
+      <code style='margin-bottom: 10px; display: block'>https://fcc-image.herokuapp.com/api/latest/imagesearch</code>
+      <pre>
+        [
+          {
+            term: "programming",
+            when: "2016-01-20T12:25:00+00:00"
+          },
+          {...}
+        ]</pre>
+    </div>
+  </body>
+</html>

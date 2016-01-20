@@ -19,6 +19,8 @@ const filterLatestSearch = (latestSearches) => (
   latestSearches.reverse().slice(0, 10)
 )
 
+app.use('/', express.static(`${__dirname}/../public`));
+
 app.get('/api/imagesearch/:searchString', (req, res) => {
   const searchString = req.params.searchString;
   search(searchString, req.query.offset)

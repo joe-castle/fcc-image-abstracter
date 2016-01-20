@@ -1,34 +1,60 @@
-# FCC URL Shortener Project
+# FCC Image Abstracter Project
 
-Please see challenge page for more info: http://www.freecodecamp.com/challenges/url-shortener-microservice
+Please see challenge page for more info: http://www.freecodecamp.com/challenges/image-search-abstraction-layer
 
+_The app uses redis to persist the latest search results.
+You can install redis with homebrew._
+```
+> brew install redis
+> redis-server
+```
+The app is configured to work with the default ip and ports so once redis-server is up, it will automatically work.
 ```
 > npm install
 > node src/server.js
 ```
+---
+The Search results are powered by Google. You will need to sign up for a [Custom Search Engine](https://cse.google.co.uk/cse/) (enabling image searches) and create a new project at [Google Developers](https://console.developers.google.com/) (enabling the custom search api).
 
-Example Creation Usage:
+Then export an object under src/_keys/googleapi.js with the following signature: (I recommend not uploading this file to the internet).
 ```
-https://fccurl.herokuapp.com/new/http://www.google.com
-https://fccurl.herokuapp.com/new/www.freecodecamp.com
+{
+  _API: {String} // Developer Project API
+  _CSEID: {String} // Custom Search Engine ID
+}
 ```
+This is generally for development, the app looks for API & CSEID env variables for production purposes.
 
-You can pass `?allow=true` to force the creation of a url, otherwise it is subject to validation.
+---
+### Example Image Search:
 ```
-https://fccurl.herokuapp.com/fakeurl?allow=true
+https://fcc-image.herokuapp.com/api/imagesearch/programming
 ```
-
-Example Creation Output:
+**Output:**
 ```
-{original_url: "http://www.google.com", short_url: "https://fccurl.herokuapp.com/0"}
-{original_url: "http://www.freecodecamp.com", short_url: "https://fccurl.herokuapp.com/1"}
-{original_url: "fakeurl", short_url: "https://fccurl.herokuapp.com/2"}
+[
+  {
+    url: "https://www.greenedu.com/img/ajax-programming.jpg",
+    snippet: "AJAX Programming Courses",
+    thumbnail: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR289ZWtkg48qnxeaTe6SQMWZIkIdifZyWiO1azaX8dYKXooWuYXjlVFwo",
+    context: "https://www.greenedu.com/ajax-programming-courses"
+  },
+  {...}
+]
 ```
-Usage:
+You can pass an offset number, e.g: `?offset=2`, to paginate through the results. 10 results per page.
+### Example Latest Image Searches:
+Only the latest 10 results are returned.
 ```
-https://fccurl.herokuapp.com/3
+https://fcc-image.herokuapp.com/api/latest/imagesearch
 ```
-Will re-direct to:
+**Output:**
 ```
-https://en.wikipedia.org/wiki/Computer_programming
+[
+  {
+    term: "programming",
+    when: "2016-01-20T12:25:00+00:00"
+  },
+  {...}
+]
 ```

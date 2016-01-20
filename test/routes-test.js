@@ -27,16 +27,16 @@ describe('Express Routes', () => {
     })
     it('Returns error if the search returns no results', (done) => {
       const expectedResponse = {
-        error: 'No images found'
+        error: 'No images found for that query.'
       };
       request(app)
-        .get('/api/imagesearch/thiswontwork')
+        .get('/api/imagesearch/gobildygook1231231231231231')
         .expect((res) => {
           expect(res.body).to.deep.equal(expectedResponse);
         })
         .end(done);
     })
-    it('Each image should contain key/value pairs', (done) => {
+    it('Each image object should contain specific keys', (done) => {
       const expectedResponse = ['url', 'snippet', 'thumbnail', 'context'];
       request(app)
         .get('/api/imagesearch/lolcats')

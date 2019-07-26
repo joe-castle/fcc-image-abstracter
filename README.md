@@ -1,5 +1,7 @@
 # FCC Image Abstracter Project
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/joesmith100/fcc-image-abstracter.svg)](https://greenkeeper.io/)
+
 Please see challenge page for more info: http://www.freecodecamp.com/challenges/image-search-abstraction-layer
 
 _The app uses redis to persist the latest search results.
